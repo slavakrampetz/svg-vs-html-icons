@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Сравнение SVG+CSS против CSS-only анимации</title>
+	<link rel="stylesheet" href="test.css">
+
+  <style>
+
+    .compare td {
+      max-width: 400px;
+    }
+
+    .compare pre {
+      white-space: normal;
+    }
+  </style>
+</head>
+<body>
+
+<section class="section">
+
+  <div class="content">
+    <h1>Сравнение SVG+CSS и CSS-only анимации</h1>
+
+    <p>
+      Задача. Понять, какой способ выбрать для использования иконок, в том числе и анимированных. Стоит ли использовать CSS-only метод.
+    </p>
+
+
+    <h3 class="title is-4">Примеры</h3>
+    <p>Слева - символ собранный с помощью HTML/CSS. Справа - анимация SVG. SVG вставлен фоном, прописан в стилевом файле.</p>
+  </div>
+
+	<div class="columns">
+		<div class="column">
+			<div class="message is-light">
+				<div class="message-header">
+					default
+				</div>
+				<div class="message-body">
+					<div class="spinner"><i></i><i></i><i></i><b></b></div>
+					<div class="spinner2"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="column">
+			<div class="message is-light">
+				<div class="message-header">
+					is-large
+				</div>
+				<div class="message-body">
+					<div class="spinner is-large"><i></i><i></i><i></i><b></b></div>
+					<div class="spinner2 is-large"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="column">
+			<div class="message is-light">
+				<div class="message-header">
+					is-medium
+				</div>
+				<div class="message-body">
+					<div class="spinner is-medium"><i></i><i></i><i></i><b></b></div>
+					<div class="spinner2 is-medium"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="column">
+			<div class="message is-light">
+				<div class="message-header">
+					is-small
+				</div>
+				<div class="message-body">
+					<div class="spinner is-small"><i></i><i></i><i></i><b></b></div>
+					<div class="spinner2 is-small"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <div class="content">
+
+  <h4 class="title is-4">Сравнение</h4>
+  <table class="table compare">
+    <thead>
+      <tr>
+        <th>Что сравниваем</th>
+        <th>CSS-only</th>
+        <th>SVG, вставка фоновой картинкой и SVG-use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Скорость изготовления новой иконки
+        </td>
+        <td>
+          - Долго из-за кроссбраузерности
+        </td>
+        <td>
+          + Быстро, много иконок в интернете
+        </td>
+      </tr>
+      <tr>
+        <td class="l">Скачивание</td>
+        <td>
+          <b>Размеры</b><br>
+          = СSS, &lt;3Kb (2399 байт в примере), кэшируемый. HTML &lt;100 (54 в примере) байт на иконку.<br>
+          <b>Количество запросов</b><br>
+          + Нет дополнительных запросов
+        </td>
+        <td>
+          <b>Размеры</b><br>
+          = СSS, &lt;1Kb (359 в примере), кэшируемый. HTML &lt;100 (30-40 в примере) байт на иконку. SVG 1-5Кб, кэшируется.<br>
+          <b>Количество запросов</b><br>
+          - По одному доп. запросу на иконку
+        </td>
+      </tr>
+      <tr>
+        <td>Использование</td>
+        <td>
+          + Использовать легко<br>
+          + Легко адаптировать (цвета и пр.)<br>
+          + Нет доп. файлов<br>
+          + Можно анимировать CSS<br>
+          + Можно красить частями при вставке<br>
+          - Нельзя масштабировать при вставке, надо готовить стили<br>
+          - Сложные иконки не реализуешь
+        </td>
+        <td>
+          <b>Фоновой картинкой</b><br>
+          + Легко вставлять<br>
+          - Цвет не меняется, hover и пр. только при наличии доп. картинок<br>
+          - Много файлов картинок, неудобно. Спрайты использовать нельзя.<br>
+          + Можно встроить неуправляемую анимацию без CSS<br>
+          + Можно управляемо анимировать CSS<br>
+          - Нельзя анимировать часть картинки<br>
+          + Можно масштабировать при вставке<br>
+          + Иконки любой сложности<br>
+          <b>Библиотека + JS-лоадер</b><br>
+          + Легко вставлять<br>
+          + Цвет меняется стилями, можно hover и пр.<br>
+          ~ Мало файлов<br>
+          + Можно встроить быструю анимацию без CSS<br>
+          + Можно управляемо анимировать CSS<br>
+          ~ Можно, но сложно анимировать часть картинки CSS/JS<br>
+          + Можно масштабировать при вставке<br>
+          + Иконки любой сложности
+        </td>
+      </tr>
+      <tr>
+        <td>Скорость анимации</td>
+        <td>Подтармаживает</td>
+        <td>Быстро</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Выводы</th>
+        <td>
+          <b>Использовать:</b><br>
+          Для часто повторяющихся несложных, неанимированных или малоанимированных объектов, как: бутерброд, закрыть, спиннер.<br>
+        </td>
+        <td>
+          <b>Использовать:</b><br>
+          Для остальных иконок.<br>
+          Фоновые - для иконок типа сложных и красивых лоадеров с утверждённым дизайном.<br>
+          Загружаемые - для иконок списков, в кнопках и пр.<br>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <h4 class="title is-4">SASS code, from mini-v5</h4>
+  <pre><code class="sass">// 1. Common overrides
+@import 'asset/init'
+
+// 2. Bulma and more
+@import 'ext/bulma-adx'
+
+// 4. Customization for layout and content
+@import 'asset/spinner'
+
+.spinner
+  +spinner(32px,$text)
+  &.is-large
+    +spinner(64px,$text)
+  &.is-medium
+    +spinner(48px,$text)
+  &.is-small
+    +spinner(16px,$text)
+
+.spinner2
+  position: relative
+  background: url('spinner.svg') no-repeat center center
+  background-size: cover
+  width: 32px
+  height: 32px
+  display: inline-block
+  animation: spinner-rotate 1s linear infinite
+  &.is-large
+    width: 64px
+    height: 64px
+  &.is-medium
+    width: 48px
+    height: 48px
+  &.is-small
+    width: 16px
+    height: 16px</code></pre>
+</div>
+
+</section>
+
+</body>
+</html>
